@@ -16,12 +16,40 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class PatientDriverApp extends Application{
-	
+	Patient patient = new Patient();
+	Procedure procedure1 = new Procedure();
+	Procedure procedure2 = new Procedure();
+	Procedure procedure3 = new Procedure();
 
 	public void start(Stage stage) {
-		Label label1 = new Label("hello1");
-		Label label2 = new Label("hello2");
-		Label label3 = new Label("hello3");
+		
+		TextField firstNameTextField = new TextField();
+		TextField middleNameTextField = new TextField();
+		TextField lastNameTextField = new TextField();
+		TextField addressTextField = new TextField();
+		TextField cityTextField = new TextField();
+		TextField stateTextField = new TextField();
+		TextField zipTextField = new TextField();
+		TextField phoneTextField = new TextField();
+		TextField emergencyNameTextField = new TextField();
+		TextField emergencyPhoneTextField = new TextField();
+		
+		TextField procedure1NameTextField = new TextField();
+		TextField procedure1DateTextField = new TextField();
+		TextField procedure1PractitionerTextField = new TextField();
+		TextField procedure1ChargeTextField = new TextField();
+		
+		TextField procedure2NameTextField = new TextField();
+		TextField procedure2DateTextField = new TextField();
+		TextField procedure2PractitionerTextField = new TextField();
+		TextField procedure2ChargeTextField = new TextField();
+		
+		TextField procedure3NameTextField = new TextField();
+		TextField procedure3DateTextField = new TextField();
+		TextField procedure3PractitionerTextField = new TextField();
+		TextField procedure3ChargeTextField = new TextField();
+		
+		TextArea textOutput = new TextArea();
 		
 		Button showOutputButton = new Button("Show Output");
 		Button exitButton = new Button("Exit");
@@ -30,41 +58,136 @@ public class PatientDriverApp extends Application{
 		Button saveProcedure2 = new Button("Save Procedure 2");
 		Button saveProcedure3 = new Button("Save Procedure 3");
 		
-		TextArea textOutput = new TextArea();
+		savePatient.setOnAction(e -> {
+			String firstName = firstNameTextField.getText().trim();
+			String middleName = middleNameTextField.getText().trim();
+			String lastName = lastNameTextField.getText().trim();
+			String address = addressTextField.getText().trim();
+			String city = cityTextField.getText().trim();
+			String state = stateTextField.getText().trim();
+			String phone = phoneTextField.getText().trim();
+			String emergencyName = emergencyNameTextField.getText().trim();
+			String emergencyPhone = emergencyPhoneTextField.getText().trim();
+			int zip = Integer.parseInt(zipTextField.getText().trim());
+			patient = new Patient(
+					firstName,
+					lastName,
+					middleName,
+					address,
+					city,
+					state,
+					zip,
+					phone,
+					emergencyName,
+					emergencyPhone);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Message");
+			alert.setHeaderText("Message");
+			alert.setContentText("Patient saved Successfully.");
+			alert.showAndWait();
+		});
+		saveProcedure1.setOnAction(e -> {
+			String procedure1Name = procedure1NameTextField.getText().trim();
+			String procedure1Date = procedure1DateTextField.getText().trim();
+			String procedure1Practitioner = procedure1PractitionerTextField.getText().trim();
+			double procedure1Charge = Double.parseDouble(procedure1ChargeTextField.getText().trim());
+			procedure1 = new Procedure(
+					procedure1Name,
+					procedure1Date,
+					procedure1Practitioner,
+					procedure1Charge);
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Message");
+			alert.setHeaderText("Message");
+			alert.setContentText("Procedure1 saved Successfully.");
+			alert.showAndWait();
+
+		});
+		saveProcedure2.setOnAction(e -> {
+			String procedure2Name = procedure2NameTextField.getText().trim();
+			String procedure2Date = procedure2DateTextField.getText().trim();
+			String procedure2Practitioner = procedure2PractitionerTextField.getText().trim();
+
+			double procedure2Charge = Double.parseDouble(
+			        procedure2ChargeTextField.getText().trim()
+			);
+
+			procedure2 = new Procedure(
+			        procedure2Name,
+			        procedure2Date,
+			        procedure2Practitioner,
+			        procedure2Charge
+			);
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Message");
+			alert.setHeaderText("Message");
+			alert.setContentText("Procedure2 saved Successfully.");
+			alert.showAndWait();
+		});
+		saveProcedure3.setOnAction(e ->  {
+			String procedure3Name = procedure3NameTextField.getText().trim();
+			String procedure3Date = procedure3DateTextField.getText().trim();
+			String procedure3Practitioner = procedure3PractitionerTextField.getText().trim();
+
+			double procedure3Charge = Double.parseDouble(
+			        procedure3ChargeTextField.getText().trim()
+			);
+
+			procedure3 = new Procedure(
+			        procedure3Name,
+			        procedure3Date,
+			        procedure3Practitioner,
+			        procedure3Charge
+			);
+
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setTitle("Message");
+			alert.setHeaderText("Message");
+			alert.setContentText("Procedure3 saved Successfully.");
+			alert.showAndWait();
+
+		});;
+		showOutputButton.setOnAction(e -> {
+			String output = patient.toString() + '\n' + procedure1.toString() + '\n' + procedure2.toString() + '\n' + procedure3.toString();
+			textOutput.setText(output);
+		});
+		exitButton.setOnAction(e -> {
+			System.exit(0);
+		});
+		
+		
 		
 		GridPane patientInfoGrid = new GridPane();
 		patientInfoGrid.add(new Label("First Name"), 0, 0);
-		patientInfoGrid.add(new TextField(), 1, 0);
-		
+		patientInfoGrid.add(firstNameTextField, 1, 0);
+
 		patientInfoGrid.add(new Label("Middle Name"), 0, 1);
-		patientInfoGrid.add(new TextField(), 1, 1);
-		
+		patientInfoGrid.add(middleNameTextField, 1, 1);
+
 		patientInfoGrid.add(new Label("Last Name"), 0, 2);
-		patientInfoGrid.add(new TextField(), 1, 2);
-		
+		patientInfoGrid.add(lastNameTextField, 1, 2);
+
 		patientInfoGrid.add(new Label("Address"), 0, 3);
-		patientInfoGrid.add(new TextField(), 1, 3);
-		
+		patientInfoGrid.add(addressTextField, 1, 3);
+
 		patientInfoGrid.add(new Label("City"), 0, 4);
-		patientInfoGrid.add(new TextField(), 1, 4);
-		
+		patientInfoGrid.add(cityTextField, 1, 4);
+
 		patientInfoGrid.add(new Label("State"), 0, 5);
-		patientInfoGrid.add(new TextField(), 1, 5);
-		
-		patientInfoGrid.add(new Label("State"), 0, 6);
-		patientInfoGrid.add(new TextField(), 1, 6);
-		
-		patientInfoGrid.add(new Label("ZIP"), 0, 7);
-		patientInfoGrid.add(new TextField(), 1, 7);
-		
-		patientInfoGrid.add(new Label("Phone"), 0, 8);
-		patientInfoGrid.add(new TextField(), 1, 8);
-		
-		patientInfoGrid.add(new Label("Emergency Name"), 0, 9);
-		patientInfoGrid.add(new TextField(), 1, 9);
-		
-		patientInfoGrid.add(new Label("Emergency Phone"), 0, 10);
-		patientInfoGrid.add(new TextField(), 1, 10);
+		patientInfoGrid.add(stateTextField, 1, 5);
+
+		patientInfoGrid.add(new Label("ZIP"), 0, 6);
+		patientInfoGrid.add(zipTextField, 1, 6);
+
+		patientInfoGrid.add(new Label("Phone"), 0, 7);
+		patientInfoGrid.add(phoneTextField, 1, 7);
+
+		patientInfoGrid.add(new Label("Emergency Name"), 0, 8);
+		patientInfoGrid.add(emergencyNameTextField, 1, 8);
+
+		patientInfoGrid.add(new Label("Emergency Phone"), 0, 9);
+		patientInfoGrid.add(emergencyPhoneTextField, 1, 9);
 		
 		patientInfoGrid.add(savePatient, 0, 11);
 		
@@ -73,16 +196,16 @@ public class PatientDriverApp extends Application{
 		
 		GridPane procedure1Grid = new GridPane();
 		procedure1Grid.add(new Label("Name"), 0, 0);
-		procedure1Grid.add(new TextField(), 1, 0);
-		
+		procedure1Grid.add(procedure1NameTextField, 1, 0);
+
 		procedure1Grid.add(new Label("Date"), 0, 1);
-		procedure1Grid.add(new TextField(), 1, 1);
-		
-		procedure1Grid.add(new Label("Practioner"), 0, 2);
-		procedure1Grid.add(new TextField(), 1, 2);
-		
-		procedure1Grid.add(new Label("Charge($)"), 0, 3);
-		procedure1Grid.add(new TextField(), 1, 3);
+		procedure1Grid.add(procedure1DateTextField, 1, 1);
+
+		procedure1Grid.add(new Label("Practitioner"), 0, 2);
+		procedure1Grid.add(procedure1PractitionerTextField, 1, 2);
+
+		procedure1Grid.add(new Label("Charge ($)"), 0, 3);
+		procedure1Grid.add(procedure1ChargeTextField, 1, 3);
 		
 		procedure1Grid.add(saveProcedure1, 0, 4);
 		
@@ -92,16 +215,16 @@ public class PatientDriverApp extends Application{
 		
 		GridPane procedure2Grid = new GridPane();
 		procedure2Grid.add(new Label("Name"), 0, 0);
-		procedure2Grid.add(new TextField(), 1, 0);
-		
+		procedure2Grid.add(procedure2NameTextField, 1, 0);
+
 		procedure2Grid.add(new Label("Date"), 0, 1);
-		procedure2Grid.add(new TextField(), 1, 1);
-		
-		procedure2Grid.add(new Label("Practioner"), 0, 2);
-		procedure2Grid.add(new TextField(), 1, 2);
-		
-		procedure2Grid.add(new Label("Charge($)"), 0, 3);
-		procedure2Grid.add(new TextField(), 1, 3);
+		procedure2Grid.add(procedure2DateTextField, 1, 1);
+
+		procedure2Grid.add(new Label("Practitioner"), 0, 2);
+		procedure2Grid.add(procedure2PractitionerTextField, 1, 2);
+
+		procedure2Grid.add(new Label("Charge ($)"), 0, 3);
+		procedure2Grid.add(procedure2ChargeTextField, 1, 3);
 		
 		procedure2Grid.add(saveProcedure2, 0, 4);
 		
@@ -111,16 +234,16 @@ public class PatientDriverApp extends Application{
 		
 		GridPane procedure3Grid = new GridPane();
 		procedure3Grid.add(new Label("Name"), 0, 0);
-		procedure3Grid.add(new TextField(), 1, 0);
-		
+		procedure3Grid.add(procedure3NameTextField, 1, 0);
+
 		procedure3Grid.add(new Label("Date"), 0, 1);
-		procedure3Grid.add(new TextField(), 1, 1);
-		
-		procedure3Grid.add(new Label("Practioner"), 0, 2);
-		procedure3Grid.add(new TextField(), 1, 2);
-		
-		procedure3Grid.add(new Label("Charge($)"), 0, 3);
-		procedure3Grid.add(new TextField(), 1, 3);
+		procedure3Grid.add(procedure3DateTextField, 1, 1);
+
+		procedure3Grid.add(new Label("Practitioner"), 0, 2);
+		procedure3Grid.add(procedure3PractitionerTextField, 1, 2);
+
+		procedure3Grid.add(new Label("Charge ($)"), 0, 3);
+		procedure3Grid.add(procedure3ChargeTextField, 1, 3);
 		
 		procedure3Grid.add(saveProcedure3, 0, 4);
 		
@@ -146,6 +269,7 @@ public class PatientDriverApp extends Application{
 	public static void main(String[] args) {
 		System.out.println("Hello world");
 		launch();
+		System.exit(0);
 	}
 
 	
@@ -228,7 +352,6 @@ class Patient{
 	
 	// no argument constructor
 	public Patient() {
-		
 	}
 	// parameterized constructor for first name, last name, and middle name.
 	public Patient(String firstName, String lastName, String middleName) {
